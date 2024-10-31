@@ -6,3 +6,4 @@ yapf==0.40.1
 scipy==1.10.1
 openpyxl==3.1.5
 pip==23.2.1
+tensorboard==2.14.0
