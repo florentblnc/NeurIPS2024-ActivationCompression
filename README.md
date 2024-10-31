@@ -102,10 +102,14 @@ bash  scripts/HOSVD/mbv2/c10_mbv2_var0.8.sh
 cd segmentation
 ```
 
-1. Install requirements
+1. Install dependencies
 
 ```
-pip install -r requirements
+pip install openmim
+mim install mmcv-full==1.6.1
+cd mmsegmentation
+pip install -e .
+cd ..
 ```
 
 2. Prepare dataset
