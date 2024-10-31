@@ -105,6 +105,7 @@ cd segmentation
 1. Install dependencies for semantic segmentation
 
 ```
+pip install opencv-python
 pip install openmim
 mim install mmcv-full==1.6.1
 cd mmsegmentation
