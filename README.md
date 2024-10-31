@@ -102,7 +102,7 @@ bash  scripts/HOSVD/mbv2/c10_mbv2_var0.8.sh
 cd segmentation
 ```
 
-1. Install dependencies
+1. Install dependencies for semantic segmentation
 
 ```
 pip install openmim
@@ -152,7 +152,7 @@ In the [scripts](segmentation/scripts) directory, you can find pre-configured ba
   
 
 ```bash
-bash  scripts/dlv3/hosvd/hosvd_dlv3_0.8.sh
+bash  scripts/dlv3/HOSVD/hosvd_dlv3_0.8.sh
 ```
 
 **Note:** To measure activation memory, please refer to [here](segmentation/README.md)
