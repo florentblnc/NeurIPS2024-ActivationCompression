@@ -162,6 +162,12 @@ class ClassificationModel(LightningModule):
         self.raw_size.clear()
 
     def attach_memory_info_list_HOSVD_SVD(self):
+        for name in self.filter_cfgs["finetuned_layer"]:
+            path_seq = name.split('.')
+            target = reduce(getattr, path_seq, self)
+            for param in target.parameters():
+                param.requires_grad = False
+            
         if self.with_SVD:
             self.filter_cfgs["svd_size"] = self.svd_size
             register_SVD_filter(self, self.filter_cfgs)
@@ -169,6 +175,7 @@ class ClassificationModel(LightningModule):
         elif self.with_HOSVD:
             self.filter_cfgs["k_hosvd"] = self.k_hosvd
             register_HOSVD_filter(self, self.filter_cfgs)
+        self.update_optimizer()
 
 
     def get_activation_size(self, data, consider_active_only=True, element_size=4, unit="MB"): # For VanillaBP and Gradient Filter
@@ -306,6 +313,17 @@ class ClassificationModel(LightningModule):
         optimizer = th.optim.Adam(filter(lambda p: p.requires_grad, self.parameters()),
                                   lr=self.learning_rate, weight_decay=self.weight_decay, betas=(0.8, 0.9))
         return [optimizer]
+
+    def update_optimizer(self):
+        optimizer = self.trainer.optimizers[0]
+
+        for name in self.filter_cfgs["finetuned_layer"]:
+            path_seq = name.split('.')
+            target = reduce(getattr, path_seq, self) # Turn on gradient
+
+            optimizer.add_param_group({
+                'params': filter(lambda p: p.requires_grad, target.parameters())
+            })
 
     def bn_eval(self):
         def f(m):
