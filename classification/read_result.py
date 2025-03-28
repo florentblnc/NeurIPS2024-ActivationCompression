@@ -199,8 +199,8 @@ def read_result(root_directory, unit):
 
     # Export results to Excel
     df = pd.DataFrame(results)
-    df.to_excel('results.xlsx', index=False)
-    print("Results have been exported to results.xlsx")
+    df.to_excel('results_3.xlsx', index=False)
+    print("Results have been exported to results_3.xlsx")
 
 
 # Use this function
@@ -210,7 +210,7 @@ root_directory: link to folder of the experiment, or event the folder of folders
 output: 'results.xlsx' file contains all the results
 """
 
-
-root_directory = "/home/trungnl2000/official_release/NeuRISP2024-Activation-Map-Compression-through-Tensor-Decomposition-for-Deep-Learning/classification/runs/setupA/mbv2/cub200/gradfilt/2/filt_l2_r2_full_pretrain_imagenet_cub200/version_0/"
+root_directory = "runs/cls/mbv2/filt_last1_cifar10/version_10"
 read_result(root_directory, unit='MB')
+
 

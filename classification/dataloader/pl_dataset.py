@@ -131,19 +131,19 @@ class ClsDatasetA(LightningDataModule):
 
     def train_dataloader(self):
         return DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=self.train_shuffle,
-                          num_workers=self.train_workers, pin_memory=True, drop_last=True)
+                          num_workers=self.train_workers, pin_memory=False, drop_last=True)
 
     def val_dataloader(self):
         return DataLoader(self.val_dataset, batch_size=self.batch_size, shuffle=False,
-                          num_workers=self.val_workers, pin_memory=True, drop_last=True)
+                          num_workers=self.val_workers, pin_memory=False, drop_last=True)
 
     def predict_dataloader(self):
         return DataLoader(self.val_dataset, batch_size=1, shuffle=False,
-                          num_workers=self.val_workers, pin_memory=True)
+                          num_workers=self.val_workers, pin_memory=False)
 
     def test_dataloader(self):
         return DataLoader(self.test_dataset, batch_size=1, shuffle=False,
-                          num_workers=self.val_workers, pin_memory=True)
+                          num_workers=self.val_workers, pin_memory=False)
 
 # Source: https://github.com/SLDGroup/GradientFilter-CVPR23/blob/main/classification/dataloader/pl_dataset.py
 class ClsDatasetB(LightningDataModule):
@@ -346,11 +346,11 @@ class ClsDatasetB(LightningDataModule):
 
     def predict_dataloader(self):
         return DataLoader(self.val_dataset, batch_size=1, shuffle=False,
-                          num_workers=self.val_workers, pin_memory=True)
+                          num_workers=self.val_workers, pin_memory=False)
 
     def test_dataloader(self):
         return DataLoader(self.val_dataset, batch_size=1, shuffle=False,
-                          num_workers=self.val_workers, pin_memory=True)
+                          num_workers=self.val_workers, pin_memory=False)
     
 class ClsDataset(LightningDataModule):
     def __init__(self, setup, data_dir, name='mnist',
